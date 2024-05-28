@@ -5,14 +5,14 @@ import lombok.Getter;
 
 @Getter
 @JsonTypeName("true")
-public final class SuccessResponseBody<T> extends ResponseBody<T>{
-    private final T result;
+public final class SuccessResponseBody<T> extends ResponseBody<T> {
+    private final T data;
 
     public SuccessResponseBody() {
-        result = null;
+        data = null;
     }
 
     public SuccessResponseBody(T result) {
-        this.result = result;
+        this.data = result;
     }
 }

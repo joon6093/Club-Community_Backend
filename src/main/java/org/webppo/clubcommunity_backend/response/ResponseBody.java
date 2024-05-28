@@ -22,6 +22,6 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public sealed abstract class ResponseBody<T> permits SuccessResponseBody, FailedResponseBody{
+public sealed abstract class ResponseBody<T> permits SuccessResponseBody, FailedResponseBody {
     private String code;
 }

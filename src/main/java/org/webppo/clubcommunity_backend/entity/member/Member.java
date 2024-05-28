@@ -71,12 +71,19 @@ public class Member extends EntityDate {
         this.role = role;
     }
 
+    public void updateAdditionalInfo(LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, String registrationType, Role role) {
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.department = department;
+        this.studentId = studentId;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.registrationType = registrationType;
+        this.role = role;
+    }
+
     public void updateInfo(String username, String profileImage) {
         this.username = username;
         this.profileImage = profileImage;
-    }
-
-    public void changeRole(Role role) {
-        this.role = role;
     }
 }

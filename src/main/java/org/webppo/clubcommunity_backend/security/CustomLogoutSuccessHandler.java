@@ -3,15 +3,15 @@ package org.webppo.clubcommunity_backend.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.changppo.commons.ResponseBody;
-import org.changppo.commons.SuccessResponseBody;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
-
+import org.webppo.clubcommunity_backend.response.ResponseBody;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+
+import static org.webppo.clubcommunity_backend.response.ResponseUtil.createSuccessResponse;
 
 @Component
 public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
@@ -21,7 +21,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        response.getWriter().write(convertToJson(new SuccessResponseBody<>()));
+        response.getWriter().write(convertToJson(createSuccessResponse()));
     }
 
     private String convertToJson(ResponseBody<Void> response) throws IOException {

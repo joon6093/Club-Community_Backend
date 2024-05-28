@@ -1,7 +1,7 @@
 package org.webppo.clubcommunity_backend.response.exception.member;
 
-import org.changppo.account.response.exception.common.BusinessException;
-import org.changppo.account.response.exception.common.ExceptionType;
+import org.webppo.clubcommunity_backend.response.exception.common.BusinessException;
+import org.webppo.clubcommunity_backend.response.exception.common.ExceptionType;
 
 public abstract class MemberBusinessException extends BusinessException {
 

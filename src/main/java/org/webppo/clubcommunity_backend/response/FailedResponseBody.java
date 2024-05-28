@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 @JsonTypeName("false")
-public final class FailedResponseBody<T> extends ResponseBody<T> {
+public final class FailedResponseBody extends ResponseBody<Void> {
 
     private final String msg;
 
     public FailedResponseBody(String code, String msg) {
-        super.setCode(code);
+        this.setCode(code);
         this.msg = msg;
     }
 }
