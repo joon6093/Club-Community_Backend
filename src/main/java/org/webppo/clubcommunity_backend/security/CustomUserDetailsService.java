@@ -20,13 +20,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public CustomOAuth2UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByNameWithRoles(username).orElseThrow(MemberNotFoundException::new);
+        Member member = memberRepository.findByName(username).orElseThrow(MemberNotFoundException::new);
 
         return new CustomOAuth2UserDetails(
                 member.getId(),
                 member.getName(),
                 member.getPassword(),
-                Collections.singleton(new SimpleGrantedAuthority(member.getRole().getRoleType().name()))
+                Collections.singleton(new SimpleGrantedAuthority(member.getRole().name()))
         );
     }
 }

@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.webppo.clubcommunity_backend.entity.common.EntityDate;
+import org.webppo.clubcommunity_backend.entity.member.type.RoleType;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -48,12 +50,12 @@ public class Member extends EntityDate {
     @Column
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoleType role;
 
     @Builder
-    public Member(String name, String password, String username, String profileImage, LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, Role role) {
+    public Member(String name, String password, String username, String profileImage, LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, RoleType role) {
         this.name = name;
         this.password = password;
         this.username = username;
@@ -67,7 +69,7 @@ public class Member extends EntityDate {
         this.role = role;
     }
 
-    public void updateAdditionalInfo(LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, Role role) {
+    public void updateAdditionalInfo(LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, RoleType role) {
         this.birthDate = birthDate;
         this.gender = gender;
         this.department = department;

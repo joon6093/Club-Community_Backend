@@ -15,8 +15,7 @@ public enum ExceptionType {
     SESSION_EXPIRED_EXCEPTION(UNAUTHORIZED, "E006", "Your session has expired. Please log in again."),
     MEMBER_NOT_FOUND_EXCEPTION(NOT_FOUND, "E007", "The specified member could not be found."),
     UNSUPPORTED_OAUTH2_EXCEPTION(INTERNAL_SERVER_ERROR, "E008", "Unsupported OAuth2 provider."),
-    UPDATE_AUTHENTICATION_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR,"E009", "Failed to update authentication information."),
-    ROLE_NOT_FOUND_EXCEPTION(NOT_FOUND, "E010", "The specified role could not be found.");
+    UPDATE_AUTHENTICATION_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR,"E009", "Failed to update authentication information.");
 
     private final HttpStatus status;
     private final String code;
