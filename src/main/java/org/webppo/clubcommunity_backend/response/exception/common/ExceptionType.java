@@ -15,7 +15,12 @@ public enum ExceptionType {
     SESSION_EXPIRED_EXCEPTION(UNAUTHORIZED, "E006", "Your session has expired. Please log in again."),
     MEMBER_NOT_FOUND_EXCEPTION(NOT_FOUND, "E007", "The specified member could not be found."),
     UNSUPPORTED_OAUTH2_EXCEPTION(INTERNAL_SERVER_ERROR, "E008", "Unsupported OAuth2 provider."),
-    UPDATE_AUTHENTICATION_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR,"E009", "Failed to update authentication information.");
+    UPDATE_AUTHENTICATION_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR,"E009", "Failed to update authentication information."),
+    UNSUPPORTED_FILE_FORMAT_EXCEPTION(BAD_REQUEST, "E010", "Unsupported file format."),
+    FILE_UPLOAD_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR, "E011", "Failed to upload file."),
+    FILE_DELETE_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR, "E012", "Failed to delete file."),
+    BOARD_NOT_FOUND_EXCEPTION(NOT_FOUND, "E013", "The specified board could not be found.");
+
 
     private final HttpStatus status;
     private final String code;

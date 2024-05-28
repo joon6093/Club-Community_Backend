@@ -38,3 +38,6 @@ out/
 
 ### Security ###
 src/main/resources/security
+
+/images
+/videos
