@@ -1,7 +1,6 @@
 package org.webppo.clubcommunity_backend.service.board.image;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,12 +10,15 @@ import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.board.image.ImageUpdatedResult;
 import org.webppo.clubcommunity_backend.entity.board.image.Image;
 import org.webppo.clubcommunity_backend.entity.board.image.ImageBoard;
+import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.member.Member;
 import org.webppo.clubcommunity_backend.repository.board.image.ImageBoardRepository;
+import org.webppo.clubcommunity_backend.repository.club.ClubRepository;
 import org.webppo.clubcommunity_backend.repository.member.MemberRepository;
 import org.webppo.clubcommunity_backend.response.exception.board.BoardNotFoundException;
+import org.webppo.clubcommunity_backend.response.exception.club.ClubNotFoundException;
+import org.webppo.clubcommunity_backend.response.exception.club.NotClubMasterException;
 import org.webppo.clubcommunity_backend.response.exception.member.MemberNotFoundException;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,16 +32,19 @@ public class ImageBoardService {
 
     private final ImageBoardRepository imageBoardRepository;
     private final MemberRepository memberRepository;
+    private final ClubRepository clubRepository;
     private final ImageService imageService;
 
     @Transactional
     public ImageBoardDto create(Long memberId, ImageBoardCreateRequest req) {
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        Club club = clubRepository.findById(req.getClubId()).orElseThrow(ClubNotFoundException::new);
+        checkClubMaster(member, club);
 
         ImageBoard imageBoard = ImageBoard.builder()
                 .title(req.getTitle())
                 .member(member)
-                .club(null) // TODO. Club 찾아서 반환
+                .club(club)
                 .build();
 
         imageBoard.addImages(req.getImages().stream()
@@ -58,38 +63,11 @@ public class ImageBoardService {
         IntStream.range(0, images.size()).forEach(i -> imageService.upload(fileImages.get(i), images.get(i).getUniqueName()));
     }
 
-    public ImageBoardDto read(Long id) {
+    @Transactional
+    public ImageBoardDto update(Long id, ImageBoardUpdateRequest req) {
         ImageBoard imageBoard = imageBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
+        checkClubMaster(imageBoard.getMember(), imageBoard.getClub());
 
-        return new ImageBoardDto(
-                imageBoard.getId(),
-                imageBoard.getTitle(),
-                imageBoard.getImages().stream()
-                        .map(image -> new ImageBoardDto.ImageDto(image.getId(), image.getUniqueName(), image.getOriginName()))
-                        .collect(Collectors.toList())
-        );
-    }
-
-    public List<ImageBoardDto> readAll(Long clubId) {  // TODO. 추후 구현
-        return null;
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        ImageBoard imageBoard = imageBoardRepository.findById(id)
-                .orElseThrow(BoardNotFoundException::new);
-        deleteImages(imageBoard.getImages());
-        imageBoardRepository.delete(imageBoard);
-    }
-
-    private void deleteImages(List<Image> images) {
-        images.forEach(image -> imageService.delete(image.getUniqueName()));
-    }
-
-    @Transactional
-    public ImageBoardDto update(@Param("id") Long id, ImageBoardUpdateRequest req) {
-        ImageBoard imageBoard = imageBoardRepository.findById(id)
-                .orElseThrow(BoardNotFoundException::new);
         ImageUpdatedResult result = imageBoard.update(req);
         uploadImages(result.getAddedImages(), result.getAddedImageFiles());
         deleteImages(result.getDeletedImages());
@@ -102,5 +80,50 @@ public class ImageBoardService {
                         .map(image -> new ImageBoardDto.ImageDto(image.getId(), image.getUniqueName(), image.getOriginName()))
                         .collect(Collectors.toList())
         );
+    }
+
+    public ImageBoardDto read(Long id) {
+        ImageBoard imageBoard = imageBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
+
+        return new ImageBoardDto(
+                imageBoard.getId(),
+                imageBoard.getTitle(),
+                imageBoard.getImages().stream()
+                        .map(image -> new ImageBoardDto.ImageDto(image.getId(), image.getUniqueName(), image.getOriginName()))
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public List<ImageBoardDto> readAll(Long clubId) {
+        List<ImageBoard> imageBoards = imageBoardRepository.findAllByClubId(clubId);
+
+        return imageBoards.stream()
+                .map(imageBoard -> new ImageBoardDto(
+                        imageBoard.getId(),
+                        imageBoard.getTitle(),
+                        imageBoard.getImages().stream()
+                                .map(image -> new ImageBoardDto.ImageDto(image.getId(), image.getUniqueName(), image.getOriginName()))
+                                .collect(Collectors.toList())
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        ImageBoard imageBoard = imageBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
+        checkClubMaster(imageBoard.getMember(), imageBoard.getClub());
+
+        deleteImages(imageBoard.getImages());
+        imageBoardRepository.delete(imageBoard);
+    }
+
+    private void deleteImages(List<Image> images) {
+        images.forEach(image -> imageService.delete(image.getUniqueName()));
+    }
+
+    private void checkClubMaster(Member member, Club club) {
+        if (!club.getClubMaster().equals(member)) {
+            throw new NotClubMasterException();
+        }
     }
 }

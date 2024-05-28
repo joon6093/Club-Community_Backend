@@ -31,32 +31,32 @@ public class ImageBoardController {
                 .body(createSuccessResponse(imageBoardDto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseBody<ImageBoardDto>> read(@PathVariable(name = "id") Long id) {
-        ImageBoardDto imageBoardDto = imageBoardService.read(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(createSuccessResponse(imageBoardDto));
-    }
-
-    @GetMapping("/club/{id}")
-    public ResponseEntity<ResponseBody<List<ImageBoardDto>>> readAll(@PathVariable(name = "id") Long clubId) {
-        List<ImageBoardDto> imageBoardDtos = imageBoardService.readAll(clubId);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(createSuccessResponse(imageBoardDtos));
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity<ResponseBody<ImageBoardDto>> update(@PathVariable(name = "id") Long id, @Valid @ModelAttribute ImageBoardUpdateRequest request) {
+    public ResponseEntity<ResponseBody<ImageBoardDto>> update(@PathVariable Long id, @Valid @ModelAttribute ImageBoardUpdateRequest request) {
         ImageBoardDto imageBoardDto = imageBoardService.update(id, request);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(createSuccessResponse(imageBoardDto));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseBody<ImageBoardDto>> read(@PathVariable Long id) {
+        ImageBoardDto imageBoardDto = imageBoardService.read(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(createSuccessResponse(imageBoardDto));
+    }
+
+    @GetMapping("/club/{clubId}")
+    public ResponseEntity<ResponseBody<List<ImageBoardDto>>> readAll(@PathVariable Long clubId) {
+        List<ImageBoardDto> imageBoardDtos = imageBoardService.readAll(clubId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(createSuccessResponse(imageBoardDtos));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseBody<Void>> delete(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<ResponseBody<Void>> delete(@PathVariable Long id) {
         imageBoardService.delete(id);
         return ResponseEntity
                 .status(HttpStatus.OK)
