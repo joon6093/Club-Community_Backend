@@ -71,6 +71,19 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/members/**").hasRole("PENDING")
                         .requestMatchers(HttpMethod.GET, "/api/members/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/members/**").hasAnyRole("PENDING","USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/clubForms/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/clubForms").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/clubForms/**").hasRole("ADMIN")
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -81,6 +94,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
+
+
+
+
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .anyRequest().hasRole("ADMIN"));
 

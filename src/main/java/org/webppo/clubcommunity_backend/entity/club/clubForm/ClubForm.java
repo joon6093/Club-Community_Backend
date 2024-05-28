@@ -1,12 +1,12 @@
 package org.webppo.clubcommunity_backend.entity.club.clubForm;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.webppo.clubcommunity_backend.entity.club.ProgressType;
 import org.webppo.clubcommunity_backend.entity.common.EntityDate;
 import org.webppo.clubcommunity_backend.entity.member.Member;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class ClubForm extends EntityDate {
@@ -26,12 +26,16 @@ public class ClubForm extends EntityDate {
     private String advisorMajor;
     @Column(nullable = false)
     private String advisorContact;
+    @Setter
+    @Column
+    private String rejectReason;
     @Enumerated(EnumType.STRING) // status (검토/승인/거절)
     private ProgressType progress;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
+    @Builder
     public ClubForm(String clubType, String clubName, String applicantDepartment, String advisorName, String advisorMajor, String advisorContact, ProgressType progress, Member member) {
         this.clubType = clubType;
         this.clubName = clubName;
@@ -41,5 +45,13 @@ public class ClubForm extends EntityDate {
         this.advisorContact = advisorContact;
         this.progress = progress;
         this.member = member;
+    }
+
+    public void approve() {
+        this.progress = ProgressType.APPROVAL;
+    }
+
+    public void reject() {
+        this.progress = ProgressType.REJECT;
     }
 }

@@ -19,9 +19,92 @@ public enum ExceptionType {
     UNSUPPORTED_FILE_FORMAT_EXCEPTION(BAD_REQUEST, "E010", "Unsupported file format."),
     FILE_UPLOAD_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR, "E011", "Failed to upload file."),
     FILE_DELETE_FAILURE_EXCEPTION(INTERNAL_SERVER_ERROR, "E012", "Failed to delete file."),
-    BOARD_NOT_FOUND_EXCEPTION(NOT_FOUND, "E013", "The specified board could not be found.");
+    BOARD_NOT_FOUND_EXCEPTION(NOT_FOUND, "E013", "The specified board could not be found."),
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    CLUB_FROM_NOT_FOUND(NOT_FOUND,"E100", "The ClubForm could not be found."),
+    REJECT_REASON_IS_NULL(BAD_REQUEST,"E101", "Reject Reason is null"),
+
+
+    ;
     private final HttpStatus status;
     private final String code;
     private final String message;
