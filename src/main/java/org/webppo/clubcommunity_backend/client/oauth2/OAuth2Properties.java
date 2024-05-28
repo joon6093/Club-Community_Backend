@@ -9,18 +9,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "oauth2")
 public class OAuth2Properties {
     private Kakao kakao;
-    private Github github;
 
     @Getter
     @Setter
     public static class Kakao {
         private String adminKey;
-    }
-
-    @Getter
-    @Setter
-    public static class Github {
-        private String clientId;
-        private String clientSecret;
     }
 }
