@@ -2,6 +2,7 @@ package org.webppo.clubcommunity_backend.entity.club;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.webppo.clubcommunity_backend.entity.common.EntityDate;
 import org.webppo.clubcommunity_backend.entity.member.Member;
@@ -9,6 +10,7 @@ import org.webppo.clubcommunity_backend.entity.member.Member;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Club extends EntityDate {
