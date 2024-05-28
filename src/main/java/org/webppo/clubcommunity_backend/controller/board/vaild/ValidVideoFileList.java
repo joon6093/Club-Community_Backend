@@ -6,11 +6,11 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = ImageFileValidator.class)
+@Constraint(validatedBy = VideoFileListValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidImageFile {
-    String message() default "Invalid image";
+public @interface ValidVideoFileList {
+    String message() default "Invalid video files";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

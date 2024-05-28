@@ -11,14 +11,13 @@ import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.response.ResponseBody;
 import org.webppo.clubcommunity_backend.security.PrincipalHandler;
 import org.webppo.clubcommunity_backend.service.board.image.ImageBoardService;
-
 import java.util.List;
 
 import static org.webppo.clubcommunity_backend.response.ResponseUtil.createSuccessResponse;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/image-boards")
+@RequestMapping("/api/boards/image")
 public class ImageBoardController {
 
     private final ImageBoardService imageBoardService;

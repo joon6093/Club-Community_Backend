@@ -19,6 +19,8 @@ import org.webppo.clubcommunity_backend.response.exception.board.BoardNotFoundEx
 import org.webppo.clubcommunity_backend.response.exception.club.ClubNotFoundException;
 import org.webppo.clubcommunity_backend.response.exception.club.NotClubMasterException;
 import org.webppo.clubcommunity_backend.response.exception.member.MemberNotFoundException;
+import org.webppo.clubcommunity_backend.service.board.FileService;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,7 +35,7 @@ public class ImageBoardService {
     private final ImageBoardRepository imageBoardRepository;
     private final MemberRepository memberRepository;
     private final ClubRepository clubRepository;
-    private final ImageService imageService;
+    private final FileService fileService;
 
     @Transactional
     public ImageBoardDto create(Long memberId, ImageBoardCreateRequest req) {
@@ -60,7 +62,7 @@ public class ImageBoardService {
     }
 
     private void uploadImages(List<Image> images, List<MultipartFile> fileImages) {
-        IntStream.range(0, images.size()).forEach(i -> imageService.upload(fileImages.get(i), images.get(i).getUniqueName()));
+        IntStream.range(0, images.size()).forEach(i -> fileService.upload(fileImages.get(i), images.get(i).getUniqueName(), "image"));
     }
 
     @Transactional
@@ -118,7 +120,7 @@ public class ImageBoardService {
     }
 
     private void deleteImages(List<Image> images) {
-        images.forEach(image -> imageService.delete(image.getUniqueName()));
+        images.forEach(image -> fileService.delete(image.getUniqueName(), "image"));
     }
 
     private void checkClubMaster(Member member, Club club) {

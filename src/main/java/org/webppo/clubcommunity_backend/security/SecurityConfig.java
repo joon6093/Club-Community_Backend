@@ -90,10 +90,10 @@ public class SecurityConfig {
 
 
 
-                        .requestMatchers(HttpMethod.POST, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.PATCH, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/image-boards/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/boards/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/boards/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/boards/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/boards/**").hasAnyRole("USER", "ADMIN")
 
 
 
