@@ -20,7 +20,6 @@ public class MemberDto {
     private String studentId;
     private String phoneNumber;
     private String email;
-    private String registrationType;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")

@@ -46,7 +46,4 @@ public class MemberSignupRequest {
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email should be valid")
     private String email;
-
-    @NotBlank(message = "Registration type is mandatory")
-    private String registrationType;
 }

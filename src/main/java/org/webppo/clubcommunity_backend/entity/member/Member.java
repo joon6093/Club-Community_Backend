@@ -48,15 +48,12 @@ public class Member extends EntityDate {
     @Column
     private String email;
 
-    @Column
-    private String registrationType;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @Builder
-    public Member(String name, String password, String username, String profileImage, LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, String registrationType, Role role) {
+    public Member(String name, String password, String username, String profileImage, LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, Role role) {
         this.name = name;
         this.password = password;
         this.username = username;
@@ -67,18 +64,16 @@ public class Member extends EntityDate {
         this.studentId = studentId;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.registrationType = registrationType;
         this.role = role;
     }
 
-    public void updateAdditionalInfo(LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, String registrationType, Role role) {
+    public void updateAdditionalInfo(LocalDateTime birthDate, String gender, String department, String studentId, String phoneNumber, String email, Role role) {
         this.birthDate = birthDate;
         this.gender = gender;
         this.department = department;
         this.studentId = studentId;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.registrationType = registrationType;
         this.role = role;
     }
 

@@ -52,7 +52,6 @@ public class MemberService {
                         .studentId(request.getStudentId())
                         .phoneNumber(request.getPhoneNumber())
                         .email(request.getEmail())
-                        .registrationType(request.getRegistrationType())
                         .role(role)
                         .build());
 
@@ -68,7 +67,6 @@ public class MemberService {
                 member.getStudentId(),
                 member.getPhoneNumber(),
                 member.getEmail(),
-                member.getRegistrationType(),
                 member.getCreatedAt(),
                 member.getModifiedAt()
         );
@@ -84,7 +82,7 @@ public class MemberService {
         Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new);
         member.updateAdditionalInfo(memberUpdateRequest.getBirthDate(), memberUpdateRequest.getGender(),
                 memberUpdateRequest.getDepartment(), memberUpdateRequest.getStudentId(), memberUpdateRequest.getPhoneNumber(),
-                memberUpdateRequest.getEmail(), memberUpdateRequest.getRegistrationType(), userRole);
+                memberUpdateRequest.getEmail(), userRole);
         updateAuthentication(member);
         return new MemberDto(
                 member.getId(),
@@ -98,7 +96,6 @@ public class MemberService {
                 member.getStudentId(),
                 member.getPhoneNumber(),
                 member.getEmail(),
-                member.getRegistrationType(),
                 member.getCreatedAt(),
                 member.getModifiedAt()
         );
