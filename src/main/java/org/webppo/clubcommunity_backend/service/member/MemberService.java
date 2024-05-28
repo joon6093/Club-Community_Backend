@@ -19,15 +19,12 @@ import org.webppo.clubcommunity_backend.dto.member.MemberDto;
 import org.webppo.clubcommunity_backend.dto.member.MemberSignupRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberUpdateRequest;
 import org.webppo.clubcommunity_backend.entity.member.Member;
-import org.webppo.clubcommunity_backend.entity.member.Role;
 import org.webppo.clubcommunity_backend.entity.member.oauth2.OAuth2AuthorizedClient;
 import org.webppo.clubcommunity_backend.entity.member.oauth2.OAuth2AuthorizedClientId;
 import org.webppo.clubcommunity_backend.entity.member.type.RoleType;
 import org.webppo.clubcommunity_backend.repository.member.MemberRepository;
-import org.webppo.clubcommunity_backend.repository.member.RoleRepository;
 import org.webppo.clubcommunity_backend.repository.member.oauth2.OAuth2AuthorizedClientRepository;
 import org.webppo.clubcommunity_backend.response.exception.member.MemberNotFoundException;
-import org.webppo.clubcommunity_backend.response.exception.member.RoleNotFoundException;
 import org.webppo.clubcommunity_backend.response.exception.member.UpdateAuthenticationFailureException;
 import org.webppo.clubcommunity_backend.security.CustomOAuth2UserDetails;
 
@@ -44,16 +41,12 @@ import static org.webppo.clubcommunity_backend.client.oauth2.kakao.KakaoConstant
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final OAuth2AuthorizedClientRepository authorizedClientRepository;
     private final List<OAuth2Client> oauth2Clients;
 
     @Transactional
     public MemberDto register(MemberSignupRequest request) {
-        Role role = roleRepository.findByRoleType(RoleType.ROLE_USER)
-                .orElseThrow(RoleNotFoundException::new);
-
         Member member = memberRepository.save(
                 Member.builder()
                         .name(request.getName())
@@ -66,7 +59,7 @@ public class MemberService {
                         .studentId(request.getStudentId())
                         .phoneNumber(request.getPhoneNumber())
                         .email(request.getEmail())
-                        .role(role)
+                        .role(RoleType.ROLE_USER)
                         .build());
 
         return new MemberDto(
@@ -74,7 +67,7 @@ public class MemberService {
                 member.getName(),
                 member.getUsername(),
                 member.getProfileImage(),
-                member.getRole().getRoleType(),
+                member.getRole(),
                 member.getBirthDate(),
                 member.getGender(),
                 member.getDepartment(),
@@ -93,17 +86,16 @@ public class MemberService {
     @Transactional
     public MemberDto update(Long id, MemberUpdateRequest memberUpdateRequest) {
         Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
-        Role userRole = roleRepository.findByRoleType(RoleType.ROLE_USER).orElseThrow(RoleNotFoundException::new);
         member.updateAdditionalInfo(memberUpdateRequest.getBirthDate(), memberUpdateRequest.getGender(),
                 memberUpdateRequest.getDepartment(), memberUpdateRequest.getStudentId(), memberUpdateRequest.getPhoneNumber(),
-                memberUpdateRequest.getEmail(), userRole);
+                memberUpdateRequest.getEmail(), RoleType.ROLE_USER);
         updateAuthentication(member);
         return new MemberDto(
                 member.getId(),
                 member.getName(),
                 member.getUsername(),
                 member.getProfileImage(),
-                member.getRole().getRoleType(),
+                member.getRole(),
                 member.getBirthDate(),
                 member.getGender(),
                 member.getDepartment(),
@@ -150,7 +142,7 @@ public class MemberService {
     }
 
     private Set<GrantedAuthority> getAuthority(Member member) {
-        RoleType roleType = member.getRole().getRoleType();
+        RoleType roleType = member.getRole();
         return Collections.singleton(new SimpleGrantedAuthority(roleType.name()));
     }
 
