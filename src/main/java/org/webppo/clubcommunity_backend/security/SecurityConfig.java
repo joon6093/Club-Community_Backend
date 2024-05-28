@@ -70,6 +70,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/members/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/api/members/**").hasRole("PENDING")
                         .requestMatchers(HttpMethod.GET, "/api/members/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/members/**").hasAnyRole("PENDING","USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .anyRequest().hasRole("ADMIN"));
 
