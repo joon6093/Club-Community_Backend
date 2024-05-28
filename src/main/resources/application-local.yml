@@ -18,6 +18,12 @@ spring:
 api:
   url: http://localhost:8080
 
+upload:
+  image:
+    location: images/
+  video:
+    location: videos/
+
 logging:
   level:
     org.hibernate.orm.jdbc.bind: trace

@@ -1,7 +1,9 @@
 package org.webppo.clubcommunity_backend.entity.board;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.common.EntityDate;
 import org.webppo.clubcommunity_backend.entity.member.Member;
@@ -10,6 +12,7 @@ import org.webppo.clubcommunity_backend.entity.member.Member;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "board_type")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Board extends EntityDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +29,10 @@ public abstract class Board extends EntityDate {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public Board(String title, Club club, Member member) {
+        this.title = title;
+        this.club = club;
+        this.member = member;
+    }
 }
