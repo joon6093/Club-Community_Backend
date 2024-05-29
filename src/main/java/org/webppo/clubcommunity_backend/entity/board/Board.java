@@ -20,7 +20,7 @@ public abstract class Board extends EntityDate {
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    protected String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "club_id")
@@ -28,7 +28,7 @@ public abstract class Board extends EntityDate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    protected Member member;
 
     public Board(String title, Club club, Member member) {
         this.title = title;

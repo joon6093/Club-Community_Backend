@@ -97,7 +97,7 @@ public enum ExceptionType {
 
 
 
-
+    NOT_CLUB_MEMBER(BAD_REQUEST, "E197", "Member is not the member of this club."),
     NOT_CLUB_MASTER(BAD_REQUEST, "E198", "Member is not the master of this club."),
     CLUB_NOT_FOUND(NOT_FOUND,"E199", "The Club could not be found."),
     CLUB_FROM_NOT_FOUND(NOT_FOUND,"E100", "The ClubForm could not be found."),

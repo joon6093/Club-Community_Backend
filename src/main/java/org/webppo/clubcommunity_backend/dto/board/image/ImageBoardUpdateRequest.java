@@ -14,6 +14,8 @@ import java.util.List;
 @Data
 public class ImageBoardUpdateRequest {
 
+    private String title;
+
     @ValidImageFileList
     private List<MultipartFile> addedImages = new ArrayList<>();
 
