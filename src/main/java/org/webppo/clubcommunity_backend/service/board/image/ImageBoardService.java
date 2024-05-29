@@ -19,6 +19,7 @@ import org.webppo.clubcommunity_backend.response.exception.board.BoardNotFoundEx
 import org.webppo.clubcommunity_backend.response.exception.club.ClubNotFoundException;
 import org.webppo.clubcommunity_backend.response.exception.club.NotClubMasterException;
 import org.webppo.clubcommunity_backend.response.exception.member.MemberNotFoundException;
+import org.webppo.clubcommunity_backend.security.PrincipalHandler;
 import org.webppo.clubcommunity_backend.service.board.FileService;
 
 import java.util.List;
@@ -68,7 +69,8 @@ public class ImageBoardService {
     @Transactional
     public ImageBoardDto update(Long id, ImageBoardUpdateRequest req) {
         ImageBoard imageBoard = imageBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
-        checkClubMaster(imageBoard.getMember(), imageBoard.getClub());
+        Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
+        checkClubMaster(member, imageBoard.getClub());
 
         ImageUpdatedResult result = imageBoard.update(req);
         uploadImages(result.getAddedImages(), result.getAddedImageFiles());
@@ -113,7 +115,8 @@ public class ImageBoardService {
     @Transactional
     public void delete(Long id) {
         ImageBoard imageBoard = imageBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
-        checkClubMaster(imageBoard.getMember(), imageBoard.getClub());
+        Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
+        checkClubMaster(member, imageBoard.getClub());
 
         deleteImages(imageBoard.getImages());
         imageBoardRepository.delete(imageBoard);
