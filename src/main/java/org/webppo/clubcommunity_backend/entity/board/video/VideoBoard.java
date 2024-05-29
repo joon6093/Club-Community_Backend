@@ -49,8 +49,10 @@ public class VideoBoard extends Board {
     }
 
     public VideoUpdatedResult update(Member member, VideoBoardUpdateRequest req) {
-        this.title = req.getTitle();
         this.member = member;
+        if (req.getTitle() != null) {
+            this.title = req.getTitle();
+        }
         VideoUpdatedResult result = findVideoUpdatedResult(req.getAddedVideos(), req.getDeletedVideos());
         addVideos(result.getAddedVideos());
         removeVideos(result.getDeletedVideos());

@@ -50,8 +50,10 @@ public class ImageBoard extends Board {
     }
 
     public ImageUpdatedResult update(Member member, ImageBoardUpdateRequest req) {
-        this.title = req.getTitle();
         this.member = member;
+        if (req.getTitle() != null) {
+            this.title = req.getTitle();
+        }
         ImageUpdatedResult result = findImageUpdatedResult(req.getAddedImages(), req.getDeletedImages());
         addImages(result.getAddedImages());
         removeImages(result.getDeletedImages());
