@@ -14,7 +14,10 @@ import java.util.List;
 @Data
 public class VideoBoardUpdateRequest {
 
+    private String title;
+
     @ValidVideoFileList
     private List<MultipartFile> addedVideos = new ArrayList<>();
+
     private List<Long> deletedVideos = new ArrayList<>();
 }

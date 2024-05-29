@@ -72,7 +72,7 @@ public class ImageBoardService {
         Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
         checkClubMaster(member, imageBoard.getClub());
 
-        ImageUpdatedResult result = imageBoard.update(req);
+        ImageUpdatedResult result = imageBoard.update(member, req);
         uploadImages(result.getAddedImages(), result.getAddedImageFiles());
         deleteImages(result.getDeletedImages());
         imageBoardRepository.save(imageBoard);

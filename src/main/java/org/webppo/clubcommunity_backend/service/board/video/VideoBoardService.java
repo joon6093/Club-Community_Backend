@@ -72,7 +72,7 @@ public class VideoBoardService {
         Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
         checkClubMaster(member, videoBoard.getClub());
 
-        VideoUpdatedResult result = videoBoard.update(req);
+        VideoUpdatedResult result = videoBoard.update(member, req);
         uploadVideos(result.getAddedVideos(), result.getAddedVideoFiles());
         deleteVideos(result.getDeletedVideos());
         videoBoardRepository.save(videoBoard);

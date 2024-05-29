@@ -14,7 +14,6 @@ import org.webppo.clubcommunity_backend.dto.board.image.ImageUpdatedResult;
 import org.webppo.clubcommunity_backend.entity.board.Board;
 import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.member.Member;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +41,17 @@ public class ImageBoard extends Board {
         });
     }
 
-    public ImageUpdatedResult update(ImageBoardUpdateRequest req) {
+    public void removeImages(List<Image> imageList) {
+        List<Image> imagesToRemove = new ArrayList<>(imageList);
+        for (Image image : imagesToRemove) {
+            this.images.remove(image);
+            image.setImageBoard(null);
+        }
+    }
+
+    public ImageUpdatedResult update(Member member, ImageBoardUpdateRequest req) {
+        this.title = req.getTitle();
+        this.member = member;
         ImageUpdatedResult result = findImageUpdatedResult(req.getAddedImages(), req.getDeletedImages());
         addImages(result.getAddedImages());
         removeImages(result.getDeletedImages());
@@ -69,13 +78,5 @@ public class ImageBoard extends Board {
 
     private Optional<Image> convertImageIdToImage(Long id) {
         return this.images.stream().filter(i -> i.getId().equals(id)).findAny();
-    }
-
-    public void removeImages(List<Image> imageList) {
-        List<Image> imagesToRemove = new ArrayList<>(imageList);
-        for (Image image : imagesToRemove) {
-            this.images.remove(image);
-            image.setImageBoard(null);
-        }
     }
 }

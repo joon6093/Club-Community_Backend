@@ -40,7 +40,17 @@ public class VideoBoard extends Board {
         });
     }
 
-    public VideoUpdatedResult update(VideoBoardUpdateRequest req) {
+    public void removeVideos(List<Video> videoList) {
+        List<Video> videosToRemove = new ArrayList<>(videoList);
+        for (Video video : videosToRemove) {
+            this.videos.remove(video);
+            video.setVideoBoard(null);
+        }
+    }
+
+    public VideoUpdatedResult update(Member member, VideoBoardUpdateRequest req) {
+        this.title = req.getTitle();
+        this.member = member;
         VideoUpdatedResult result = findVideoUpdatedResult(req.getAddedVideos(), req.getDeletedVideos());
         addVideos(result.getAddedVideos());
         removeVideos(result.getDeletedVideos());
@@ -67,13 +77,5 @@ public class VideoBoard extends Board {
 
     private Optional<Video> convertVideoIdToVideo(Long id) {
         return this.videos.stream().filter(i -> i.getId().equals(id)).findAny();
-    }
-
-    public void removeVideos(List<Video> videoList) {
-        List<Video> videosToRemove = new ArrayList<>(videoList);
-        for (Video video : videosToRemove) {
-            this.videos.remove(video);
-            video.setVideoBoard(null);
-        }
     }
 }
