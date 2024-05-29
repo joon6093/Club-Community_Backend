@@ -20,6 +20,7 @@ import org.webppo.clubcommunity_backend.response.exception.board.BoardNotFoundEx
 import org.webppo.clubcommunity_backend.response.exception.club.ClubNotFoundException;
 import org.webppo.clubcommunity_backend.response.exception.club.NotClubMasterException;
 import org.webppo.clubcommunity_backend.response.exception.member.MemberNotFoundException;
+import org.webppo.clubcommunity_backend.security.PrincipalHandler;
 import org.webppo.clubcommunity_backend.service.board.FileService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,9 +69,10 @@ public class VideoBoardService {
     @Transactional
     public VideoBoardDto update(@Param("id") Long id, VideoBoardUpdateRequest req) {
         VideoBoard videoBoard = videoBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
-        checkClubMaster(videoBoard.getMember(), videoBoard.getClub());
+        Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
+        checkClubMaster(member, videoBoard.getClub());
 
-        VideoUpdatedResult result = videoBoard.update(req);
+        VideoUpdatedResult result = videoBoard.update(member, req);
         uploadVideos(result.getAddedVideos(), result.getAddedVideoFiles());
         deleteVideos(result.getDeletedVideos());
         videoBoardRepository.save(videoBoard);
@@ -113,7 +115,8 @@ public class VideoBoardService {
     @Transactional
     public void delete(Long id) {
         VideoBoard videoBoard = videoBoardRepository.findById(id).orElseThrow(BoardNotFoundException::new);
-        checkClubMaster(videoBoard.getMember(), videoBoard.getClub());
+        Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
+        checkClubMaster(member, videoBoard.getClub());
 
         deleteVideos(videoBoard.getVideos());
         videoBoardRepository.delete(videoBoard);
