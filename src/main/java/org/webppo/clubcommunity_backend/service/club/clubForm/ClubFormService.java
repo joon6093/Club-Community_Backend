@@ -1,11 +1,10 @@
 package org.webppo.clubcommunity_backend.service.club.clubForm;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormDto;
-import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormProgressRequest;
+import org.webppo.clubcommunity_backend.dto.club.clubForm.ProgressChangeRequest;
 import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormRequest;
 import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.club.ProgressType;
@@ -51,7 +50,7 @@ public class ClubFormService {
     }
 
     @Transactional
-    public void clubFormChange(Long clubFormId, ClubFormProgressRequest request) {
+    public void clubFormChange(Long clubFormId, ProgressChangeRequest request) {
         ClubForm clubForm = clubFormRepository.findById(clubFormId).orElseThrow(ClubFormNotFoundException::new);
         if(request.getProgress() == ProgressType.APPROVAL){
             clubForm.approve();

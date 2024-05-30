@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.webppo.clubcommunity_backend.dto.club.ClubUpdateRequest;
 import org.webppo.clubcommunity_backend.entity.common.EntityDate;
 import org.webppo.clubcommunity_backend.entity.member.Member;
 
@@ -24,8 +26,9 @@ public class Club extends EntityDate {
     private String clubIntroduction;
     @Column
     private String clubHistory;
+    @Setter
     @Column
-    private String clubPhoto; // 대표사진 파일명 또는 URL
+    private String clubImageName; // 대표사진 파일명 또는 URL
     @Column
     private String meetingTime; // 정기모임 시간
     @Column
@@ -63,5 +66,15 @@ public class Club extends EntityDate {
             member.getClubs().remove(register);
         }
     }
-    // Constructors, Getters, Setters
+
+    public void update(ClubUpdateRequest request) {
+        this.clubName = request.getClubName();
+        this.clubIntroduction = request.getClubIntroduction();
+        this.clubHistory = request.getClubHistory();
+        this.meetingTime = request.getMeetingTime();
+        this.president = request.getPresident();
+        this.vicePresident = request.getVicePresident();
+        this.secretary = request.getSecretary();
+    }
+
 }
