@@ -23,6 +23,8 @@ upload:
     location: images/
   video:
     location: videos/
+  file:
+    location: files/
 
 logging:
   level:

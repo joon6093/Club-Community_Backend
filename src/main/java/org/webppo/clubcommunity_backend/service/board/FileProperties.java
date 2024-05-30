@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class FileProperties {
     private Image image;
     private Video video;
+    private File file;
 
     @Getter
     @Setter
@@ -20,6 +21,12 @@ public class FileProperties {
     @Getter
     @Setter
     public static class Video {
+        private String location;
+    }
+
+    @Getter
+    @Setter
+    public static class File {
         private String location;
     }
 }

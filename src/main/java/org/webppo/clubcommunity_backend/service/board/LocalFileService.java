@@ -24,6 +24,7 @@ public class LocalFileService implements FileService {
     void postConstruct() {
         createDirectory(fileProperties.getImage().getLocation());
         createDirectory(fileProperties.getVideo().getLocation());
+        createDirectory(fileProperties.getFile().getLocation());
     }
 
     private void createDirectory(String location) {
@@ -57,6 +58,8 @@ public class LocalFileService implements FileService {
             return fileProperties.getImage().getLocation();
         } else if (fileType.equals("video")) {
             return fileProperties.getVideo().getLocation();
+        } else if (fileType.equals("file")) {
+            return fileProperties.getFile().getLocation();
         } else {
             throw new IllegalArgumentException("Unsupported file type: " + fileType);
         }
