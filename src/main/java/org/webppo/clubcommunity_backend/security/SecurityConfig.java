@@ -74,6 +74,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/clubForms/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/clubForms").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/clubForms/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/club-join-forms/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/club-join-forms/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/clubs/*/update").hasRole("USER")
 
 
 
