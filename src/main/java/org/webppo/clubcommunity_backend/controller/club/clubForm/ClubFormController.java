@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormDto;
-import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormProgressRequest;
+import org.webppo.clubcommunity_backend.dto.club.clubForm.ProgressChangeRequest;
 import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormRequest;
 import org.webppo.clubcommunity_backend.response.ResponseBody;
 import org.webppo.clubcommunity_backend.security.PrincipalHandler;
@@ -47,9 +47,9 @@ public class ClubFormController {
                 .body(createSuccessResponse(responses));
     }
 
-    @PatchMapping("/{clubFormId}")
+    @PatchMapping("/{clubFormId}/progress")
     public ResponseEntity<ResponseBody<Void>> clubFormChange(@PathVariable Long clubFormId,
-                                                             @Valid @RequestBody ClubFormProgressRequest request) {
+                                                             @Valid @RequestBody ProgressChangeRequest request) {
         clubFormService.clubFormChange(clubFormId, request);
         return ResponseEntity
                 .status(HttpStatus.OK)

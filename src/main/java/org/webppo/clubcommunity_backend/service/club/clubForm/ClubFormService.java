@@ -1,15 +1,16 @@
 package org.webppo.clubcommunity_backend.service.club.clubForm;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormDto;
-import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormProgressRequest;
+import org.webppo.clubcommunity_backend.dto.club.clubForm.ProgressChangeRequest;
 import org.webppo.clubcommunity_backend.dto.club.clubForm.ClubFormRequest;
+import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.club.ProgressType;
 import org.webppo.clubcommunity_backend.entity.club.clubForm.ClubForm;
 import org.webppo.clubcommunity_backend.entity.member.Member;
+import org.webppo.clubcommunity_backend.repository.club.ClubRepository;
 import org.webppo.clubcommunity_backend.repository.club.clubForm.ClubFormRepository;
 import org.webppo.clubcommunity_backend.repository.member.MemberRepository;
 import org.webppo.clubcommunity_backend.response.exception.club.clubForm.ClubFormNotFoundException;
@@ -25,6 +26,7 @@ public class ClubFormService {
 
     private final MemberRepository memberRepository;
     private final ClubFormRepository clubFormRepository;
+    private final ClubRepository clubRepository;
 
     @Transactional
     public void register(ClubFormRequest request, Long memberId) {
@@ -48,10 +50,13 @@ public class ClubFormService {
     }
 
     @Transactional
-    public void clubFormChange(Long clubFormId, ClubFormProgressRequest request) {
+    public void clubFormChange(Long clubFormId, ProgressChangeRequest request) {
         ClubForm clubForm = clubFormRepository.findById(clubFormId).orElseThrow(ClubFormNotFoundException::new);
         if(request.getProgress() == ProgressType.APPROVAL){
             clubForm.approve();
+            // 신청이 허락되었다면, 기본 동아리 틀 생성
+            Club club = new Club(clubForm.getClubName(), clubForm.getMember());
+            clubRepository.save(club);
         } else if(request.getProgress() == ProgressType.REJECT) {
             if(request.getRejectReason() == null)
                 throw new RejectReasonNullException();

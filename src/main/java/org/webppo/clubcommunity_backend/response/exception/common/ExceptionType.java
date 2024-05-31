@@ -102,6 +102,7 @@ public enum ExceptionType {
     CLUB_NOT_FOUND(NOT_FOUND,"E199", "The Club could not be found."),
     CLUB_FROM_NOT_FOUND(NOT_FOUND,"E100", "The ClubForm could not be found."),
     REJECT_REASON_IS_NULL(BAD_REQUEST,"E101", "Reject Reason is null"),
+    CLUB_JOIN_FORM_NOT_FOUND(NOT_FOUND,"E102", "The ClubJoinForm could not be found."),
 
 
     ;

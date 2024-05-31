@@ -32,5 +32,12 @@ public class WebConfig implements WebMvcConfigurer {
                     .addResourceLocations("file:" + videoLocation)
                     .setCacheControl(CacheControl.maxAge(Duration.ofHours(1L)).cachePublic());
         }
+
+        String fileLocation = fileProperties.getFile().getLocation();
+        if (fileLocation != null && !fileLocation.isEmpty()) {
+            registry.addResourceHandler("/file/**")
+                    .addResourceLocations("file:" + fileLocation)
+                    .setCacheControl(CacheControl.maxAge(Duration.ofHours(1L)).cachePublic());
+        }
     }
 }
