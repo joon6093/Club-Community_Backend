@@ -1,4 +1,4 @@
-package org.webppo.clubcommunity_backend.client.oauth2.kakao;
+package org.webppo.clubcommunity_backend.security.response;
 
 public class KakaoConstants {
     public static final String KAKAO_REGISTRATION_ID = "kakao";

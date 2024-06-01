@@ -70,37 +70,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/members/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/api/members/**").hasRole("PENDING")
                         .requestMatchers(HttpMethod.GET, "/api/members/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/members/**").hasAnyRole("PENDING","USER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/clubForms/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/clubForms").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/clubForms/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/club-join-forms/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PATCH, "/api/club-join-forms/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PATCH, "/api/clubs/*/update").hasRole("USER")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         .requestMatchers(HttpMethod.POST, "/api/boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/boards/**").hasAnyRole("USER", "ADMIN")
-
-
-
-
                         .requestMatchers(HttpMethod.GET).permitAll()
                         .anyRequest().hasRole("ADMIN"));
 

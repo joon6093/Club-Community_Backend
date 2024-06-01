@@ -2,7 +2,7 @@ package org.webppo.clubcommunity_backend.security.response;
 
 import java.util.Map;
 
-import static org.webppo.clubcommunity_backend.client.oauth2.kakao.KakaoConstants.*;
+import static org.webppo.clubcommunity_backend.security.response.KakaoConstants.*;
 import static org.webppo.clubcommunity_backend.entity.member.type.OAuth2Type.OAUTH2_KAKAO;
 
 public class KakaoResponse implements OAuth2Response {

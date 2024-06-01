@@ -1,7 +1,5 @@
-package org.webppo.clubcommunity_backend.controller;
+package org.webppo.clubcommunity_backend.controller.member;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -45,13 +43,5 @@ public class MemberController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(createSuccessResponse(memberDto));
-    }
-
-    @DeleteMapping("/me")
-    public ResponseEntity<ResponseBody<Void>> deleteMe(HttpServletRequest request, HttpServletResponse response) {
-        memberService.delete(PrincipalHandler.extractId(), request, response);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(createSuccessResponse());
     }
 }
