@@ -19,6 +19,9 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -39,6 +42,15 @@ public class SecurityConfig {
         http
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(corsCustomizer -> corsCustomizer.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.setAllowedOrigins(Collections.singletonList("*"));
+                    config.setAllowedMethods(Collections.singletonList("*"));
+                    config.setAllowCredentials(true);
+                    config.setAllowedHeaders(Collections.singletonList("*"));
+                    config.setMaxAge(3600L);
+                    return config;
+                }))
 
                 .exceptionHandling((exceptionConfig) ->
                         exceptionConfig.authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(customAccessDeniedHandler)
