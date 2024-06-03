@@ -18,6 +18,10 @@ spring:
       max-file-size: 5MB
       max-request-size: 5MB
 
+  mvc:
+    servlet:
+      load-on-startup: 1
+
 management:
   endpoints:
     enabled-by-default: false

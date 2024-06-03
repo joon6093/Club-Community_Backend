@@ -36,9 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 
-### Security ###
-src/main/resources/security
-
 /images
 /videos
 .DS_Store
