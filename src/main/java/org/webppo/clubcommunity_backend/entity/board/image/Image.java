@@ -15,11 +15,7 @@ public class Image extends File {
     @JoinColumn(name = "board_id", nullable = false)
     private ImageBoard imageBoard;
 
-    private final static String[] supportedExtension = {"jpg", "jpeg", "gif", "bmp", "png"};
-
-    static {
-        supportedExtensions = supportedExtension;
-    }
+    private static final String[] supportedExtensions = {"jpg", "jpeg", "gif", "bmp", "png"};
 
     public Image(String originName) {
         super(originName);
@@ -29,5 +25,10 @@ public class Image extends File {
         if (this.imageBoard == null) {
             this.imageBoard = imageBoard;
         }
+    }
+
+    @Override
+    protected String[] getSupportedExtensions() {
+        return supportedExtensions;
     }
 }
