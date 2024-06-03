@@ -15,11 +15,7 @@ public class Video extends File {
     @JoinColumn(name = "board_id", nullable = false)
     private VideoBoard videoBoard;
 
-    private final static String[] supportedExtension = {"mp4", "avi", "mov", "wmv", "flv"};
-
-    static {
-        supportedExtensions = supportedExtension;
-    }
+    private static final String[] supportedExtensions = {"mp4", "avi", "mov", "wmv", "flv"};
 
     public Video(String originName) {
         super(originName);
@@ -29,5 +25,10 @@ public class Video extends File {
         if (this.videoBoard == null) {
             this.videoBoard = videoBoard;
         }
+    }
+
+    @Override
+    protected String[] getSupportedExtensions() {
+        return supportedExtensions;
     }
 }

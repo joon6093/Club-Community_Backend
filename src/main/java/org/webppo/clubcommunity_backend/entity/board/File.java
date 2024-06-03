@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.webppo.clubcommunity_backend.response.exception.board.UnsupportedFileFormatException;
+
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -26,8 +27,6 @@ public abstract class File {
     @Column(nullable = false)
     protected String originName;
 
-    protected static String[] supportedExtensions;
-
     public File(String originName) {
         this.uniqueName = generateUniqueName(extractExtension(originName));
         this.originName = originName;
@@ -48,6 +47,8 @@ public abstract class File {
     }
 
     private boolean isSupportedFormat(String ext) {
-        return Arrays.stream(supportedExtensions).anyMatch(e -> e.equalsIgnoreCase(ext));
+        return Arrays.stream(getSupportedExtensions()).anyMatch(e -> e.equalsIgnoreCase(ext));
     }
+
+    protected abstract String[] getSupportedExtensions();
 }
