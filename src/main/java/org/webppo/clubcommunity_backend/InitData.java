@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
-@Profile({"local", "dev"})
+@Profile("local")
 @Slf4j
 public class InitData {
 

@@ -10,7 +10,7 @@ spring:
       hibernate:
         format_sql: true            # SQL 보기 좋게 출력
         highlight_sql: true         # SQL 색깔
-        hbm2ddl.auto: create
+        hbm2ddl.auto: validate
         default_batch_fetch_size: 100
     open-in-view: false
     show-sql: true
