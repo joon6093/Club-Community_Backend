@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${dev-db.host}:${dev-db.port}/${dev-db.name}
+    username: ${dev-db.username}
+    password: ${dev-db.password}
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true            # SQL 보기 좋게 출력
+        highlight_sql: true         # SQL 색깔
+        hbm2ddl.auto: create
+        default_batch_fetch_size: 100
+    open-in-view: false
+    show-sql: true
+
+api:
+  url: https://joon6093.link
+
+upload:
+  image:
+    location: images/
+  video:
+    location: videos/
+  file:
+    location: files/
+
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: trace
+#    org.springframework.transaction.interceptor: trace
