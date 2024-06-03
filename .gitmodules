@@ -1,0 +1,4 @@
+[submodule "src/main/resources/security"]
+	path = src/main/resources/security
+	url = https://github.com/joon6093/Club-Community_Backend_Security.git
+	branch = main
