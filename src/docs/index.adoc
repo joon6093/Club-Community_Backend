@@ -1,0 +1,170 @@
+= REST Docs
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: C:/IntelliJProject/Club-Community_Backend/build/generated-snippets
+
+[[Club-API]]
+== Club API
+
+[[Mebmer-API]]
+== Mebmer API
+
+=== 회원 가입
+
+`POST /api/members/signup`
+
+회원 가입을 위한 API입니다.
+
+==== 요청
+
+include::{snippets}/member-controller/signup/request-fields.adoc[]
+
+.Request Example
+include::{snippets}/member-controller/signup/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/member-controller/signup/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/member-controller/signup/http-response.adoc[]
+
+=== 회원 정보 업데이트
+
+`PATCH /api/members/pending`
+
+회원 정보를 업데이트하는 API입니다.
+
+==== 요청
+
+include::{snippets}/member-controller/update/request-fields.adoc[]
+
+.Request Example
+include::{snippets}/member-controller/update/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/member-controller/update/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/member-controller/update/http-response.adoc[]
+
+=== 현재 로그인된 회원 정보 조회
+
+`GET /api/members/me`
+
+현재 로그인된 회원의 정보를 조회하는 API입니다.
+
+==== 응답
+
+include::{snippets}/member-controller/readMe/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/member-controller/readMe/http-response.adoc[]
+
+
+[[Image-Board-API]]
+== Image Board API
+
+=== 이미지 게시물 생성
+
+`POST /api/boards/image`
+
+이미지 게시물을 생성하는 API입니다.
+
+==== 요청
+
+include::{snippets}/image-board-controller/create/request-parts.adoc[]
+
+.Request Example
+include::{snippets}/image-board-controller/create/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/image-board-controller/create/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/image-board-controller/create/http-response.adoc[]
+
+=== 이미지 게시물 수정
+
+`PATCH /api/boards/image/{id}`
+
+이미지 게시물을 수정하는 API입니다.
+
+==== 요청
+
+include::{snippets}/image-board-controller/update/path-parameters.adoc[]
+include::{snippets}/image-board-controller/update/request-parts.adoc[]
+
+.Request Example
+include::{snippets}/image-board-controller/update/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/image-board-controller/update/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/image-board-controller/update/http-response.adoc[]
+
+=== 이미지 게시물 조회
+
+`GET /api/boards/image/{id}`
+
+특정 이미지 게시물을 조회하는 API입니다.
+
+==== 요청
+
+include::{snippets}/image-board-controller/read/path-parameters.adoc[]
+
+.Request Example
+include::{snippets}/image-board-controller/read/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/image-board-controller/read/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/image-board-controller/read/http-response.adoc[]
+
+=== 클럽의 모든 이미지 게시물 조회
+
+`GET /api/boards/image/club/{clubId}`
+
+특정 클럽의 모든 이미지 게시물을 조회하는 API입니다.
+
+==== 요청
+
+include::{snippets}/image-board-controller/readAll/path-parameters.adoc[]
+
+.Request Example
+include::{snippets}/image-board-controller/readAll/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/image-board-controller/readAll/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/image-board-controller/readAll/http-response.adoc[]
+
+=== 이미지 게시물 삭제
+
+`DELETE /api/boards/image/{id}`
+
+특정 이미지 게시물을 삭제하는 API입니다.
+
+==== 요청
+
+include::{snippets}/image-board-controller/delete/path-parameters.adoc[]
+
+.Request Example
+include::{snippets}/image-board-controller/delete/http-request.adoc[]
+
+==== 응답
+
+.Response Example
+include::{snippets}/image-board-controller/delete/http-response.adoc[]
