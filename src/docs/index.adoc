@@ -1,0 +1,64 @@
+= REST Docs
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:snippets: C:/IntelliJProject/Club-Community_Backend/build/generated-snippets
+
+[[Club-API]]
+== Club API
+
+=== 회원 가입
+
+`POST /api/members/signup`
+
+회원 가입을 위한 API입니다.
+
+==== 요청
+
+include::{snippets}/member-controller/signup/request-fields.adoc[]
+
+.Request Example
+include::{snippets}/member-controller/signup/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/member-controller/signup/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/member-controller/signup/http-response.adoc[]
+
+=== 회원 정보 업데이트
+
+`PATCH /api/members/pending`
+
+회원 정보를 업데이트하는 API입니다.
+
+==== 요청
+
+include::{snippets}/member-controller/update/request-fields.adoc[]
+
+.Request Example
+include::{snippets}/member-controller/update/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/member-controller/update/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/member-controller/update/http-response.adoc[]
+
+=== 현재 로그인된 회원 정보 조회
+
+`GET /api/members/me`
+
+현재 로그인된 회원의 정보를 조회하는 API입니다.
+
+==== 응답
+
+include::{snippets}/member-controller/readMe/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/member-controller/readMe/http-response.adoc[]
