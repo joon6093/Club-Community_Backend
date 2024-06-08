@@ -10,6 +10,116 @@
 [[Club-API]]
 == Club API
 
+=== 클럽 마스터 확인
+
+`GET /api/clubs/{clubId}/is-master`
+
+클럽 ID로 자신이 클럽의 마스터인지 조회하는 API입니다.
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/is-master_when-user-is-master_then-return-true/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/is-master_when-user-is-master_then-return-true/response-body.adoc[]
+
+---
+
+=== 클럽 정보 확인
+
+`GET /api/clubs/{clubId}`
+
+클럽 ID로 클럽의 세부정보를 조회하는 API입니다.
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/find-by-id_when-club-exists_then-return-club-dto/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/find-by-id_when-club-exists_then-return-club-dto/response-body.adoc[]
+
+---
+
+=== 모든 클럽의 정보 확인
+
+`GET /api/clubs/{clubId}`
+
+모든 클럽의 정보를 확인하는 API 입니다.
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/find-all_when-clubs-exist_then-return-club-dto-list/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/find-all_when-clubs-exist_then-return-club-dto-list/response-body.adoc[]
+
+---
+
+=== 클럽 정보 수정하기 - 클럽마스터
+
+`GET /api/clubs/{clubId}`
+
+해당 클럽의 정보를 수정하는 API 입니다. 클럽의 마스터만 사용 가능합니다.
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/update-club_when-user-is-master_then-return-created/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/update-club_when-user-is-master_then-return-created/response-body.adoc[]
+
+---
+
+=== 내가 속한 모든 클럽 목록
+
+`GET /api/clubs/me`
+
+내가 속한 모든 클럽의 목록을 확인합니다
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/find-member-id/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/find-member-id/response-body.adoc[]
+
+---
+
+=== 동아리의 모든 회원 정보를 확인 - 클럽마스터
+
+`GET /api/clubs/{clubId}/members`
+
+해당 동아리의 모든 회원의 정보를 확인합니다
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/find-club-members/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/find-club-members/response-body.adoc[]
+
+---
+
+=== 동아리 내의 회원을 탈퇴 처리 - 클럽마스터
+
+`GET /api/clubs/{clubId}/members/{memberId}`
+
+해당 동아리의 내의 해당 회원을 탈퇴시킵니다.
+
+==== 요청 매개변수
+
+include::{snippets}/club-controller-test/delete-club-member/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/club-controller-test/delete-club-member/response-body.adoc[]
+
 [[Mebmer-API]]
 == Mebmer API
 
