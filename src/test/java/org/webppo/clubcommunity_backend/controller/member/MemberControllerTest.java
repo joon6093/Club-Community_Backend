@@ -7,8 +7,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.webppo.clubcommunity_backend.builder.TestBuilder;
@@ -17,7 +15,6 @@ import org.webppo.clubcommunity_backend.dto.member.MemberSignupRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberUpdateRequest;
 import org.webppo.clubcommunity_backend.restdocs.AbstractRestDocsTests;
 import org.webppo.clubcommunity_backend.security.PrincipalHandler;
-import org.webppo.clubcommunity_backend.security.SecurityConfig;
 import org.webppo.clubcommunity_backend.service.member.MemberService;
 
 import static org.mockito.BDDMockito.given;
@@ -29,10 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(
-        controllers = MemberController.class,
-        excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
-        }
+        controllers = MemberController.class
 )
 public class MemberControllerTest extends AbstractRestDocsTests {
 
