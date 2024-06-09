@@ -5,6 +5,7 @@ import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardCreateRequest;
 import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardDto;
 import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.club.ClubDto;
+import org.webppo.clubcommunity_backend.dto.club.ClubUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberDto;
 import org.webppo.clubcommunity_backend.dto.member.MemberSignupRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberUpdateRequest;
@@ -143,5 +144,18 @@ public class TestBuilder {
 
 	public static ImageBoardUpdateRequest createImageBoardUpdateRequest() {
 		return new ImageBoardUpdateRequest("Updated Title", List.of(new MockMultipartFile("addedImages", "image.jpg", "image/jpeg", "test image".getBytes())), List.of(1L));
+	}
+
+	public static ClubUpdateRequest createClubUpdateRequest() {
+		return new ClubUpdateRequest(
+			"Club Name",
+			"Club Introduction",
+			"Club History",
+			new MockMultipartFile("clubPhoto", "clubPhoto.jpg", "image/jpeg", new byte[0]),
+			"Meeting Time",
+			"President",
+			"Vice President",
+			"Secretary"
+		);
 	}
 }
