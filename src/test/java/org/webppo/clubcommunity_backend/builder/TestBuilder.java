@@ -7,6 +7,9 @@ import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardCreateRequest;
 import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardDto;
 import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardUpdateRequest;
+import org.webppo.clubcommunity_backend.dto.board.recruitment.RecruitmentBoardCreateRequest;
+import org.webppo.clubcommunity_backend.dto.board.recruitment.RecruitmentBoardDto;
+import org.webppo.clubcommunity_backend.dto.board.recruitment.RecruitmentBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.club.ClubDto;
 import org.webppo.clubcommunity_backend.dto.club.ClubUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberDto;
@@ -15,6 +18,7 @@ import org.webppo.clubcommunity_backend.dto.member.MemberUpdateRequest;
 import org.webppo.clubcommunity_backend.entity.board.image.Image;
 import org.webppo.clubcommunity_backend.entity.board.image.ImageBoard;
 import org.webppo.clubcommunity_backend.entity.board.notice.NoticeBoard;
+import org.webppo.clubcommunity_backend.entity.board.recruitment.RecruitmentBoard;
 import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.member.Member;
 import org.webppo.clubcommunity_backend.entity.member.type.RoleType;
@@ -200,6 +204,46 @@ public class TestBuilder {
 		return new NoticeBoardUpdateRequest(
 				"Updated Notice Title",
 				"Updated Notice Content"
+		);
+	}
+
+	public static RecruitmentBoard createRecruitmentBoard(Member member, Club club) {
+		return RecruitmentBoard.builder()
+				.title("Test Recruitment Title")
+				.content("Test Recruitment Content")
+				.club(club)
+				.member(member)
+				.build();
+	}
+
+	public static RecruitmentBoardDto createRecruitmentBoardDto() {
+		return new RecruitmentBoardDto(
+				1L,
+				"Test Recruitment Title",
+				"Test Recruitment Content"
+		);
+	}
+
+	public static RecruitmentBoardDto createUpdatedRecruitmentBoardDto() {
+		return new RecruitmentBoardDto(
+				1L,
+				"Updated Recruitment Title",
+				"Updated Recruitment Content"
+		);
+	}
+
+	public static RecruitmentBoardCreateRequest createRecruitmentBoardCreateRequest() {
+		return new RecruitmentBoardCreateRequest(
+				"Test Recruitment Title",
+				"Test Recruitment Content",
+				1L
+		);
+	}
+
+	public static RecruitmentBoardUpdateRequest createRecruitmentBoardUpdateRequest() {
+		return new RecruitmentBoardUpdateRequest(
+				"Updated Recruitment Title",
+				"Updated Recruitment Content"
 		);
 	}
 }

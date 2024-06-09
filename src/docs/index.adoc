@@ -380,3 +380,105 @@ include::{snippets}/notice-board-controller/delete/http-request.adoc[]
 
 .Response Example
 include::{snippets}/notice-board-controller/delete/http-response.adoc[]
+
+[[Recruitment-Board-API]]
+== Recruitment Board API
+
+=== 모집 게시물 생성
+
+`POST /api/boards/recruitment`
+
+모집 게시물을 생성하는 API입니다.
+
+==== 요청
+
+include::{snippets}/recruitment-board-controller/create/request-fields.adoc[]
+
+.Request Example
+include::{snippets}/recruitment-board-controller/create/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/recruitment-board-controller/create/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/recruitment-board-controller/create/http-response.adoc[]
+
+=== 모집 게시물 수정
+
+`PATCH /api/boards/recruitment/{id}`
+
+모집 게시물을 수정하는 API입니다.
+
+==== 요청
+
+include::{snippets}/recruitment-board-controller/update/path-parameters.adoc[]
+include::{snippets}/recruitment-board-controller/update/request-fields.adoc[]
+
+.Request Example
+include::{snippets}/recruitment-board-controller/update/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/recruitment-board-controller/update/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/recruitment-board-controller/update/http-response.adoc[]
+
+=== 모집 게시물 조회
+
+`GET /api/boards/recruitment/{id}`
+
+특정 모집 게시물을 조회하는 API입니다.
+
+==== 요청
+
+include::{snippets}/recruitment-board-controller/read/path-parameters.adoc[]
+
+.Request Example
+include::{snippets}/recruitment-board-controller/read/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/recruitment-board-controller/read/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/recruitment-board-controller/read/http-response.adoc[]
+
+=== 클럽의 모든 모집 게시물 조회
+
+`GET /api/boards/recruitment/club/{clubId}`
+
+특정 클럽의 모든 모집 게시물을 조회하는 API입니다.
+
+==== 요청
+
+include::{snippets}/recruitment-board-controller/readAll/path-parameters.adoc[]
+
+.Request Example
+include::{snippets}/recruitment-board-controller/readAll/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/recruitment-board-controller/readAll/response-fields.adoc[]
+
+.Response Example
+include::{snippets}/recruitment-board-controller/readAll/http-response.adoc[]
+
+=== 모집 게시물 삭제
+
+`DELETE /api/boards/recruitment/{id}`
+
+특정 모집 게시물을 삭제하는 API입니다.
+
+==== 요청
+
+include::{snippets}/recruitment-board-controller/delete/path-parameters.adoc[]
+
+.Request Example
+include::{snippets}/recruitment-board-controller/delete/http-request.adoc[]
+
+==== 응답
+
+.Response Example
+include::{snippets}/recruitment-board-controller/delete/http-response.adoc[]
