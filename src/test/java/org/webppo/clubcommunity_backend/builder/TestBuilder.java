@@ -10,6 +10,9 @@ import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardUpdateReques
 import org.webppo.clubcommunity_backend.dto.board.recruitment.RecruitmentBoardCreateRequest;
 import org.webppo.clubcommunity_backend.dto.board.recruitment.RecruitmentBoardDto;
 import org.webppo.clubcommunity_backend.dto.board.recruitment.RecruitmentBoardUpdateRequest;
+import org.webppo.clubcommunity_backend.dto.board.video.VideoBoardCreateRequest;
+import org.webppo.clubcommunity_backend.dto.board.video.VideoBoardDto;
+import org.webppo.clubcommunity_backend.dto.board.video.VideoBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.club.ClubDto;
 import org.webppo.clubcommunity_backend.dto.club.ClubUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberDto;
@@ -19,6 +22,8 @@ import org.webppo.clubcommunity_backend.entity.board.image.Image;
 import org.webppo.clubcommunity_backend.entity.board.image.ImageBoard;
 import org.webppo.clubcommunity_backend.entity.board.notice.NoticeBoard;
 import org.webppo.clubcommunity_backend.entity.board.recruitment.RecruitmentBoard;
+import org.webppo.clubcommunity_backend.entity.board.video.Video;
+import org.webppo.clubcommunity_backend.entity.board.video.VideoBoard;
 import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.member.Member;
 import org.webppo.clubcommunity_backend.entity.member.type.RoleType;
@@ -244,6 +249,50 @@ public class TestBuilder {
 		return new RecruitmentBoardUpdateRequest(
 				"Updated Recruitment Title",
 				"Updated Recruitment Content"
+		);
+	}
+
+	public static VideoBoard createVideoBoard(Member member, Club club) {
+		VideoBoard videoBoard = VideoBoard.builder()
+				.title("Test Video Title")
+				.club(club)
+				.member(member)
+				.build();
+		Video video = new Video("testVideo.mp4");
+		video.setVideoBoard(videoBoard);
+		videoBoard.addVideos(List.of(video));
+		return videoBoard;
+	}
+
+	public static VideoBoardDto createVideoBoardDto() {
+		return new VideoBoardDto(
+				1L,
+				"Test Video Title",
+				List.of(new VideoBoardDto.VideoDto(1L, "testVideo.mp4", "testVideo.mp4"))
+		);
+	}
+
+	public static VideoBoardDto createUpdatedVideoBoardDto() {
+		return new VideoBoardDto(
+				1L,
+				"Updated Video Title",
+				List.of(new VideoBoardDto.VideoDto(1L, "testVideo.mp4", "testVideo.mp4"))
+		);
+	}
+
+	public static VideoBoardCreateRequest createVideoBoardCreateRequest() {
+		return new VideoBoardCreateRequest(
+				"Test Video Title",
+				1L,
+				List.of(new MockMultipartFile("videos", "video.mp4", "video/mp4", "test video".getBytes()))
+		);
+	}
+
+	public static VideoBoardUpdateRequest createVideoBoardUpdateRequest() {
+		return new VideoBoardUpdateRequest(
+				"Updated Video Title",
+				List.of(new MockMultipartFile("addedVideos", "video.mp4", "video/mp4", "test video".getBytes())),
+				List.of(1L)
 		);
 	}
 }
