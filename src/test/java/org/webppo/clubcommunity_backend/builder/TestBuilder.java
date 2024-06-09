@@ -4,6 +4,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardCreateRequest;
 import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardDto;
 import org.webppo.clubcommunity_backend.dto.board.image.ImageBoardUpdateRequest;
+import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardCreateRequest;
+import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardDto;
+import org.webppo.clubcommunity_backend.dto.board.notice.NoticeBoardUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.club.ClubDto;
 import org.webppo.clubcommunity_backend.dto.club.ClubUpdateRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberDto;
@@ -11,6 +14,7 @@ import org.webppo.clubcommunity_backend.dto.member.MemberSignupRequest;
 import org.webppo.clubcommunity_backend.dto.member.MemberUpdateRequest;
 import org.webppo.clubcommunity_backend.entity.board.image.Image;
 import org.webppo.clubcommunity_backend.entity.board.image.ImageBoard;
+import org.webppo.clubcommunity_backend.entity.board.notice.NoticeBoard;
 import org.webppo.clubcommunity_backend.entity.club.Club;
 import org.webppo.clubcommunity_backend.entity.member.Member;
 import org.webppo.clubcommunity_backend.entity.member.type.RoleType;
@@ -106,6 +110,19 @@ public class TestBuilder {
 		return new ClubDto(club);
 	}
 
+	public static ClubUpdateRequest createClubUpdateRequest() {
+		return new ClubUpdateRequest(
+				"Club Name",
+				"Club Introduction",
+				"Club History",
+				new MockMultipartFile("clubPhoto", "clubPhoto.jpg", "image/jpeg", new byte[0]),
+				"Meeting Time",
+				"President",
+				"Vice President",
+				"Secretary"
+		);
+	}
+
 	public static ImageBoard createImageBoard(Member member) {
 		ImageBoard imageBoard = ImageBoard.builder()
 				.title("Test Title")
@@ -146,16 +163,43 @@ public class TestBuilder {
 		return new ImageBoardUpdateRequest("Updated Title", List.of(new MockMultipartFile("addedImages", "image.jpg", "image/jpeg", "test image".getBytes())), List.of(1L));
 	}
 
-	public static ClubUpdateRequest createClubUpdateRequest() {
-		return new ClubUpdateRequest(
-			"Club Name",
-			"Club Introduction",
-			"Club History",
-			new MockMultipartFile("clubPhoto", "clubPhoto.jpg", "image/jpeg", new byte[0]),
-			"Meeting Time",
-			"President",
-			"Vice President",
-			"Secretary"
+	public static NoticeBoard createNoticeBoard(Member member) {
+		return NoticeBoard.builder()
+				.title("Test Notice Title")
+				.content("Test Notice Content")
+				.club(createClub(member))
+				.member(member)
+				.build();
+	}
+
+	public static NoticeBoardDto createNoticeBoardDto() {
+		return new NoticeBoardDto(
+				1L,
+				"Test Notice Title",
+				"Test Notice Content"
+		);
+	}
+
+	public static NoticeBoardDto createUpdatedNoticeBoardDto() {
+		return new NoticeBoardDto(
+				1L,
+				"Updated Notice Title",
+				"Updated Notice Content"
+		);
+	}
+
+	public static NoticeBoardCreateRequest createNoticeBoardCreateRequest() {
+		return new NoticeBoardCreateRequest(
+				"Test Notice Title",
+				"Test Notice Content",
+				1L
+		);
+	}
+
+	public static NoticeBoardUpdateRequest createNoticeBoardUpdateRequest() {
+		return new NoticeBoardUpdateRequest(
+				"Updated Notice Title",
+				"Updated Notice Content"
 		);
 	}
 }
