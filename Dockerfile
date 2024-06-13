@@ -21,7 +21,6 @@ COPY --from=builder /app/build/libs/*.jar app.jar
 
 RUN mkdir -p /app/images /app/videos /app/files && \
     chown -R worker:worker /app/images /app/videos /app/files
-COPY files /app/files
 
 USER worker:worker
 
