@@ -38,4 +38,6 @@ public class ClubUpdateRequest {
     @Size(max = 20, message = "동아리 총무 이름은 최대 20자까지 입력할 수 있습니다.")
     private String secretary;
 
+    private MultipartFile clubJoinFrom;
+
 }

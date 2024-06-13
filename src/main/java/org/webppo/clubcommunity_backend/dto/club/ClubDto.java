@@ -20,6 +20,7 @@ public class ClubDto {
     private String vicePresident;
     private String secretary;
     private String clubMasterName;
+    private String clubJoinFormUrl;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -36,6 +37,7 @@ public class ClubDto {
         this.vicePresident = club.getVicePresident();
         this.secretary = club.getSecretary();
         this.clubMasterName = club.getClubMaster().getUsername();
+        this.clubJoinFormUrl = club.getClubJoinFormName();
         this.createdAt = club.getCreatedAt();
         this.modifiedAt = club.getModifiedAt();
     }

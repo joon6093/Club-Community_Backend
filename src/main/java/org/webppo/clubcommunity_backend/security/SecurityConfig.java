@@ -87,7 +87,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/clubForms/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/club-join-forms/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PATCH, "/api/club-join-forms/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.PATCH, "/api/clubs/*/update").hasRole("USER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/clubs/*/update").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/boards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/api/boards/**").hasAnyRole("USER", "ADMIN")

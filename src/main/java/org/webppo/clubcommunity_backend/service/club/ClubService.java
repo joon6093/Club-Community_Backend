@@ -61,11 +61,17 @@ public class ClubService {
         if(isMasterCheck(memberId, club)) {
             club.update(request);
             MultipartFile clubPhoto = request.getClubPhoto();
-            if (!clubPhoto.isEmpty()) {
-                String originalFilename = StringUtils.cleanPath(Objects.requireNonNull(clubPhoto.getOriginalFilename()));
-                String fileName = UUID.randomUUID() + "_" + originalFilename;
-                localFileService.upload(clubPhoto, fileName, "image");
-                club.setClubImageName(fileName);
+            MultipartFile clubJoinForm = request.getClubJoinFrom();
+            if (!clubPhoto.isEmpty() && !clubJoinForm.isEmpty()) {
+                String originalPhotoFilename = StringUtils.cleanPath(Objects.requireNonNull(clubPhoto.getOriginalFilename()));
+                String originalJoinFormFilename = StringUtils.cleanPath(Objects.requireNonNull(clubJoinForm.getOriginalFilename()));
+                String photoFileName = UUID.randomUUID() + "_" + originalPhotoFilename;
+                String joinFromFileName = UUID.randomUUID() + "_" + originalJoinFormFilename;
+
+                localFileService.upload(clubPhoto, photoFileName, "image");
+                localFileService.upload(clubJoinForm, joinFromFileName, "file");
+                club.setClubImageName(photoFileName);
+                club.setClubJoinFormName(joinFromFileName);
             }
         }
     }

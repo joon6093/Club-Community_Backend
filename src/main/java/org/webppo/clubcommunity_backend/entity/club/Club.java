@@ -37,6 +37,9 @@ public class Club extends EntityDate {
     private String vicePresident;
     @Column
     private String secretary;
+    @Setter
+    @Column
+    private String clubJoinFormName; // 대표사진 파일명 또는 URL
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member clubMaster;
