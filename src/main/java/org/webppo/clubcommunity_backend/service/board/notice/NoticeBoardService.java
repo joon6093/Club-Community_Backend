@@ -69,6 +69,9 @@ public class NoticeBoardService {
     }
 
     public List<NoticeBoardDto> readAll(Long clubId) {
+        Club club = clubRepository.findById(clubId).orElseThrow(ClubNotFoundException::new);
+        Member member = memberRepository.findById(PrincipalHandler.extractId()).orElseThrow(MemberNotFoundException::new);
+        checkClubMember(member, club);
         List<NoticeBoard> noticeBoards = noticeBoardRepository.findAllByClubId(clubId);
 
         return noticeBoards.stream()
