@@ -128,7 +128,8 @@ public class TestBuilder {
 				"Meeting Time",
 				"President",
 				"Vice President",
-				"Secretary"
+				"Secretary",
+				new MockMultipartFile("clubJoinForm", "clubJoinForm.txt", "text/plain", new byte[0])
 		);
 	}
 
