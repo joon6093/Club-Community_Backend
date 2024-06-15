@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.webppo.clubcommunity_backend.service.board.FileProperties;
@@ -39,5 +40,14 @@ public class WebConfig implements WebMvcConfigurer {
                     .addResourceLocations("file:" + fileLocation)
                     .setCacheControl(CacheControl.maxAge(Duration.ofHours(1L)).cachePublic());
         }
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }
