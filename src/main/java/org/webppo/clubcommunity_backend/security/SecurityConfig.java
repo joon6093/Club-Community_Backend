@@ -1,6 +1,8 @@
 package org.webppo.clubcommunity_backend.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -87,6 +89,12 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
+    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> cookieProcessorCustomizer() {
+        return (factory) -> factory.addContextCustomizers((context) -> {
+            context.setSessionCookiePath("/");
+        });
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
