@@ -4,8 +4,6 @@ server:
     session:
       cookie:
         http-only: false
-        same-site: none
-        secure: true
 
 spring:
   profiles:
