@@ -32,6 +32,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomUserDetailsService customUserDetailsService;
+    private final CustomOAuth2LoginSuccessHandler customOAuth2LoginSuccessHandler;
     private final CustomLoginSuccessHandler customLoginSuccessHandler;
     private final CustomLoginFailureHandler customLoginFailureHandler;
     private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
@@ -57,7 +58,7 @@ public class SecurityConfig {
                         .authorizedClientService(oAuth2AuthorizedClientService)
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService))
-                        .successHandler(customLoginSuccessHandler)
+                        .successHandler(customOAuth2LoginSuccessHandler)
                         .failureHandler(customLoginFailureHandler))
 
                 .formLogin((form) -> form
